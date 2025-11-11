@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community of Muslim Alumni</title>
+    <style>
+        /* --- Google Fonts --- */
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap');
+
+        /* --- CSS Variables for Theming --- */
+        :root {
+            --primary-color: #004d40; /* Deep Teal */
+            --secondary-color: #d4af37; /* Gold */
+            --light-gray: #f7f9f9;
+            --dark-gray: #333333;
+            --text-color: #555555;
+            --header-font: 'Merriweather', serif;
+            --body-font: 'Lato', sans-serif;
+        }
+
+        /* --- General Body Styling --- */
+        body {
+            font-family: var(--body-font);
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* --- Container --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            font-family: var(--header-font);
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: #ffffff;
+            color: var(--primary-color);
+            /* UPDATED: Adjusted padding for huge logo */
+            padding: 25px 0; 
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: padding 0.3s;
+        }
+        
+        header.scrolled {
+            /* UPDATED: Adjusted scrolled padding */
+            padding: 20px 0;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo-group {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        header .logo-image {
+            /* UPDATED: Made logo taller and removed margin */
+            height: 175px;
+            margin-right: 0;
+        }
+
+        /* REMOVED: .logo-text style is no longer needed */
+
+        header nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            /* UPDATED: Increased margin */
+            margin-left: 40px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s, border-bottom-color 0.3s;
+            /* UPDATED: Increased font size */
+            font-size: 1.5rem; 
+        }
+
+        header nav a:hover {
+            color: var(--secondary-color);
+            border-bottom-color: var(--secondary-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(0, 77, 64, 0.8), rgba(0, 77, 64, 0.8)), url('https://storage.googleapis.com/gemini-generative-ai-api-prod/images/07d81a94-40da-4a6c-9a4f-a496f8c77259.jpg') no-repeat center center/cover;
+            color: #ffffff;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* UPDATED: Increased padding-top to account for ~225px header (175px logo + 50px padding) */
+            padding-top: 225px; 
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            font-family: var(--body-font);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 15px 35px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            background-color: #c5a22d;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        /* --- General Section Styling --- */
+        section {
+            padding: 80px 0;
+        }
+        
+        #mission {
+            background-color: var(--light-gray);
+        }
+
+        /* --- Mission & Vision Section --- */
+        .mission-vision-flex {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+        }
+        .mission-vision-flex > div {
+            flex: 1;
+        }
+        .mission-vision-flex h3 {
+            font-size: 1.8rem;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* --- Programs Section --- */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .program-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--primary-color);
+        }
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.1);
+        }
+        .program-card h3 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        /* --- Chapters Section --- */
+        #chapters {
+            background-color: var(--light-gray);
+            overflow-x: hidden;
+        }
+
+        .chapter-card {
+            background: var(--primary-color);
+            color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 77, 64, 0.2);
+            width: 450px; /* Width of each card */
+            margin: 0 20px; /* Spacing between cards */
+            flex-shrink: 0; /* Prevents cards from shrinking */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+        }
+        .chapter-card h3 {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .chapter-card p {
+            font-size: 1.1rem;
+            flex-grow: 1; 
+        }
+        .chapter-card .status {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        
+        /* --- Chapter Slider Controls --- */
+        .slider-controls {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .slider-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 1.5rem;
+            font-family: 'Merriweather', serif;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .slider-btn:hover:not(:disabled) {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        .slider-btn:disabled {
+            background-color: #ccc;
+            color: #888;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 100vw;
+            margin: auto;
+            overflow: hidden; /* Hides the non-visible cards */
+        }
+
+        .slider-track {
+            display: flex; /* Creates the horizontal line of cards */
+            width: fit-content; /* Makes track as wide as its content */
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        /* --- Specific Chapter Card Styles --- */
+        #uoft-chapter {
+            /* This is the subtle background image */
+            background: linear-gradient(rgba(0, 77, 64, 0.92), rgba(0, 77, 64, 0.92)), url('https://storage.googleapis.com/gemini-generative-ai-api-prod/images/c0a8767e-a052-45e0-b6f1-f00e00f919d6.jpg') no-repeat center center/cover;
+        }
+        
+        .chapter-card.coming-soon {
+            /* Style for "coming soon" cards */
+            background: #ffffff;
+            color: var(--text-color);
+            border: 3px dashed var(--primary-color);
+        }
+        .chapter-card.coming-soon h3 {
+            color: var(--primary-color);
+        }
+        .chapter-card.coming-soon .status {
+            background-color: #666;
+            color: #fff;
+        }
+
+
+        /* --- CTA Section --- */
+        #join {
+            background: var(--primary-color);
+            color: #ffffff;
+            text-align: center;
+        }
+        #join h2 {
+            color: #ffffff;
+        }
+        #join .container p {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            font-size: 1.1rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--dark-gray);
+            color: #e0e0ej;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        footer p {
+            margin: 0;
+        }
+
+        /* --- Responsive Design --- */
+        @media(max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            header .logo-group {
+                margin-bottom: 15px;
+                justify-content: center;
+            }
+            header nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            header nav a {
+                margin: 5px 10px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .mission-vision-flex {
+                flex-direction: column;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .chapter-card {
+                width: 300px;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="container">
+            <a href="#" class="logo-group">
+                <img src="CMA Logo.jpg" alt="CMA Logo" class="logo-image">
+            </a>
+            <nav>
+                <a href="#mission">Our Mission</a>
+                <a href="#programs">Programs</a>
+                <a href="#chapters">Chapters</a>
+                <a href="#join">Get Involved</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Community of Muslim Alumni</h1>
+            <p>Uniting Muslim alumni to uplift, connect, and empower one another across Canada.</p>
+            <a href="#join" class="cta-button">Join Our Community</a>
+        </div>
+    </section>
+
+    <section id="mission">
+        <div class="container">
+            <h2 class="section-title">Our Foundation</h2>
+            <div class="mission-vision-flex">
+                <div>
+                    <h3>Our Mission</h3>
+                    <p>To unite Muslim alumni from universities and colleges across Canada, building a powerful network that uplifts, connects, and empowers members to thrive personally, professionally, and spiritually – while fostering a culture of care and support.</p>
+                </div>
+                <div>
+                    <h3>Our Vision</h3>
+                    <p>A nationally recognized, collaborative Muslim alumni community with strong local chapters, creating lasting impact through mentorship, advocacy, and service. We aim to build systems of holistic support to strengthen community resilience and shared prosperity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programs">
+        <div class="container">
+            <h2 class="section-title">National Programs & Engagement</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h3>Entrepreneurship & Innovation</h3>
+                    <p>Fostering the next generation of business leaders through national pitch competitions, founder networks, and dedicated mentorship programs.</p>
+                </div>
+                <div class="program-card">
+                    <h3>Career & Networking</h3>
+                    <p>Connecting talent with opportunity via national job boards, career fairs, and cross-campus professional networking events.</p>
+                </div>
+                <div class="program-card">
+                    <h3>Advocacy & Activism</h3>
+                    <p>Mobilizing our collective voice through advocacy training, national awareness campaigns, and civic engagement initiatives.</p>
+                </div>
+                <div class="program-card">
+                    <h3>Faith & Learning</h3>
+                    <p>Strengthening our spiritual core with Islamic learning series, Ramadan programs, and community Eid celebrations.</p>
+                </div>
+                 <div class="program-card">
+                    <h3>Social & Cultural</h3>
+                    <p>Building lifelong bonds through alumni reunions, national retreats, and casual regional meetups across the country.</p>
+                </div>
+                 <div class="program-card">
+                    <h3>Resources & Support</h3>
+                    <p>Providing a safety net for our community with mental health resources, educational materials, and emergency support networks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="chapters">
+        <div class="container">
+            <h2 class="section-title">Our Chapters</h2>
+            
+            <div class="slider-controls">
+                <button id="prev-slide" class="slider-btn" aria-label="Previous Slide">&lt;</button>
+                <button id="next-slide" class="slider-btn" aria-label="Next Slide">&gt;</button>
+            </div>
+        </div>
+        
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                
+                <div class="chapter-card" id="uoft-chapter">
+                    <img src="Toronto Icon.jpg" alt="Toronto Chapter Icon" style="width:150px; height:150px; border-radius:50%; object-fit:contain; border: 5px solid #d4af37; margin-bottom: 20px; background-color: #ffffff;">
+                    <h3>University of Toronto Chapter</h3>
+                    <p>Our flagship chapter, fostering a united and supportive network of UofT Muslim alumni dedicated to growth, success, and community service.</p>
+                    <span class="status">Chapter Open!</span>
+                    <p style="margin-top: 15px; font-weight: bold; color: var(--secondary-color); font-size: 1.1rem;">
+                        As of Oct 2025: 500+ Members | 5+ Events
+                    </p>
+                </div>
+
+                <div class="chapter-card coming-soon">
+                    <img src="Waterloo Icon.jpg" alt="Waterloo Chapter (Coming Soon)" style="width:150px; height:150px; border-radius:50%; object-fit:cover; border: 5px solid #aaa; margin-bottom: 20px; filter: grayscale(100%) opacity(0.6);">
+                    <h3>University of Waterloo Chapter</h3>
+                    <p>Get ready! Our new chapter at the University of Waterloo is preparing for launch.</p>
+                    <span class="status">Coming Soon: Early 2026</span>
+                </div>
+                
+                <div class="chapter-card coming-soon">
+                    <img src="York Icon.jpg" alt="York Chapter (Future)" style="width:150px; height:150px; border-radius:50%; object-fit:cover; border: 5px solid #aaa; margin-bottom: 20px; filter: grayscale(100%) opacity(0.6);">
+                    <h3>York University Chapter</h3>
+                    <p>A future chapter is being planned for York University alumni. Stay tuned for updates.</p>
+                    <span class="status">Future: 2026</span>
+                </div>
+                
+                <div class="chapter-card coming-soon">
+                    <img src="McMaster Icon.jpg" alt="McMaster Chapter (Future)" style="width:150px; height:150px; border-radius:50%; object-fit:cover; border: 5px solid #aaa; margin-bottom: 20px; filter: grayscale(100%) opacity(0.6);">
+                    <h3>McMaster University Chapter</h3>
+                    <p>A future chapter is being planned for McMaster University alumni. Stay tuned for updates.</p>
+                    <span class="status">Future: 2026</span>
+                </div>
+
+            </div> </div> <div class="container" style="padding-top: 40px;">
+             <p style="text-align: center; font-size: 1.1rem;">More university chapters launching soon across Canada!</p>
+        </div>
+    </section>
+
+    <section id="join">
+        <div class="container">
+            <h2 class="section-title">Become Part of the Network</h2>
+            <p>Connect with a vibrant community of Muslim professionals and graduates. Whether you're seeking mentorship, looking to network, or want to give back, there's a place for you here.</p>
+            <a href="mailto:info@muslimalumni.ca?subject=Joining the Community of Muslim Alumni" class="cta-button">Contact Us to Get Involved</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Community of Muslim Alumni. All Rights Reserved.</p>
+            <p>A community built on unity, support, and service.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to add a shadow to the header on scroll
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // --- Manual Slider JavaScript ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.querySelector('.slider-track');
+            // Check if track exists before running slider code
+            if (!track) return; 
+
+            const prevButton = document.getElementById('prev-slide');
+            const nextButton = document.getElementById('next-slide');
+            const cards = Array.from(track.children);
+            let currentIndex = 0;
+
+            function updateSliderPosition() {
+                // Get the first card's width and margin
+                const card = cards[0];
+                if (!card) return; // Exit if no cards
+                
+                const cardStyle = window.getComputedStyle(card);
+                const cardWidth = card.offsetWidth;
+                const cardMarginRight = parseInt(cardStyle.marginRight, 10);
+                const cardMarginLeft = parseInt(cardStyle.marginLeft, 10);
+                
+                // Total space one card takes up
+                const cardMoveDistance = cardWidth + cardMarginLeft + cardMarginRight;
+                
+                // Calculate the new transform value
+                const newTransform = -currentIndex * cardMoveDistance;
+                track.style.transform = `translateX(${newTransform}px)`;
+
+                // Update button states
+                prevButton.disabled = currentIndex === 0;
+                // UPDATED: Max index is now cards.length - 1
+                nextButton.disabled = currentIndex === cards.length - 1;
+            }
+
+            // Event Listeners
+            nextButton.addEventListener('click', () => {
+                // UPDATED: Max index is now cards.length - 1
+                if (currentIndex < cards.length - 1) {
+                    currentIndex++;
+                    updateSliderPosition();
+                }
+            });
+
+            prevButton.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateSliderPosition();
+                }
+            });
+
+            // Initial setup
+            updateSliderPosition();
+            
+            // Re-calculate on window resize
+            window.addEventListener('resize', updateSliderPosition);
+        });
+    </script>
+
+</body>
+</html>
